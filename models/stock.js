@@ -17,6 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       Stock.belongsToMany(models.User, {through: "Portfolio"})
       Stock.hasMany(models.Portfolio)
     }
+
+    get currentPercent(){
+      const returnPercent = ((this.currentPrice - this.prevPrice) / this.prevPrice) * 100;
+      return returnPercent
+    }
   }
   Stock.init({
     name: DataTypes.STRING,
