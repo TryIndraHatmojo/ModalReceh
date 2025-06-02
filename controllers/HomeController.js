@@ -1,8 +1,10 @@
 class HomeController {
 
-    static home(req, res){
+    static async home(req, res){
         try {
             res.render("home")
+            console.log(req.session);
+            
         } catch (error) {
             res.send(error)
         }

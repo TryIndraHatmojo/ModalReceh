@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Modal Receh - Register</title>
+</head>
+
+<body>
+
+    <%- include('partials/loading.ejs') %>
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/">Home</a></li>
+                            <li><a href="/register" class="active">Sign Up</a></li>
+                            <li><a href="/login">Login</a></li>
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="item-details-page" style="padding: 140px 0px 410px 0px;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2><em>Sign Up</em></h2>
+                    </div>
+                </div>
+                <div class="col-lg-4 offset-lg-4">
+                    <form id="contact" action="/login" method="post">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h4 for="username" class="text-center m-2">Username</h4>
+                                <input type="username" name="username" id="username">
+                            </div>
+                            <div class="col-lg-12">
+                                <h4 for="email" class="text-center m-2">Email</h4>
+                                <input type="email" name="email" id="email">
+                            </div>
+                            <div class="col-lg-12">
+                                <h4 for="password" class="text-center m-2">Password</h4>
+                                <input type="password" name="password">
+                            </div>
+                            <div class="col-lg-12">
+                                <button type="submit" class="orange-button">Sign Up</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+
+</body>
+</html>

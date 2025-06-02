@@ -1848,7 +1848,7 @@ Details Page Style
 .item-details-page button:after {
   width: 50%;
   height: 2px;
-  background-color: #fff;
+  /* background-color: #fff; */
   content: '';
   position: absolute;
   left: 50%;
