@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const bcrypt = require('bcryptjs')
+
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -18,6 +20,37 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsToMany(models.Stock, {through: "Portfolio"})
       User.hasMany(models.Portfolio)
     }
+
+    static async loginPost(email, password){
+      try {
+        const data = await User.findOne({
+          where: {
+            email
+          }
+        })
+        if(data){
+          let isValid = await bcrypt.compare(password, data.password)
+          if (isValid) {
+            return data
+          }else{
+            throw {
+              name: "ErrorLogin",
+              error: "Password salah.",
+              path: "password"
+            }
+          }
+        }else{
+          throw {
+            name: "ErrorLogin",
+            error: "Email belum terdaftar.",
+            path: "email"
+          }
+        }
+      } catch (error) {
+        throw error
+      }
+    }
+
   }
   User.init({
     username: DataTypes.STRING,
