@@ -1,0 +1,23 @@
+[
+    {
+        "username": "budi_santoso",
+        "email": "budi@example.com",
+        "password": "p4ssword",
+        "balance": 100000000,
+        "role": "user"
+    },
+    {
+        "username": "guest_user",
+        "email": "guest@example.com",
+        "password": "p4ssword",
+        "balance": 1000000,
+        "role": "user"
+    },
+    {
+        "username": "superadmin",
+        "email": "superadmin@example.com",
+        "password": "p4ssword",
+        "balance": 0,
+        "role": "admin"
+    }
+]

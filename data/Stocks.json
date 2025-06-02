@@ -1,0 +1,152 @@
+[
+    {
+        "code": "BBCA",
+        "name": "Bank Central Asia Tbk",
+        "currentPrice": 9600,
+        "prevPrice": 9850,
+        "sector": "Finance",
+        "description": "Salah satu bank terbesar di Indonesia.",
+        "annualReturn": 6.5,
+        "img": "https://logo.clearbit.com/bca.co.id"
+    },
+    {
+        "code": "TLKM",
+        "name": "Telkom Indonesia Tbk",
+        "currentPrice": 3900,
+        "prevPrice": 3780,
+        "sector": "Telecommunication",
+        "description": "Perusahaan telekomunikasi milik negara.",
+        "annualReturn": 5.2,
+        "img": "https://logo.clearbit.com/telkom.co.id"
+    },
+    {
+        "code": "UNVR",
+        "name": "Unilever Indonesia Tbk",
+        "currentPrice": 4100,
+        "prevPrice": 4250,
+        "sector": "Consumer Goods",
+        "description": "Produsen barang kebutuhan sehari-hari.",
+        "annualReturn": 4.0,
+        "img": "https://logo.clearbit.com/unilever.co.id"
+    },
+    {
+        "code": "BBRI",
+        "name": "Bank Rakyat Indonesia Tbk",
+        "currentPrice": 5300,
+        "prevPrice": 5150,
+        "sector": "Finance",
+        "description": "Bank milik negara dengan fokus mikro & UMKM.",
+        "annualReturn": 7.1,
+        "img": "https://logo.clearbit.com/bri.co.id"
+    },
+    {
+        "code": "ASII",
+        "name": "Astra International Tbk",
+        "currentPrice": 6700,
+        "prevPrice": 6980,
+        "sector": "Automotive",
+        "description": "Holding besar di sektor otomotif dan alat berat.",
+        "annualReturn": 6.0,
+        "img": "https://logo.clearbit.com/astra.co.id"
+    },
+    {
+        "code": "ICBP",
+        "name": "Indofood CBP Sukses Makmur Tbk",
+        "currentPrice": 10500,
+        "prevPrice": 10250,
+        "sector": "Consumer Goods",
+        "description": "Produsen mie instan dan makanan kemasan terbesar.",
+        "annualReturn": 5.8,
+        "img": "https://logo.clearbit.com/indofoodcbp.com"
+    },
+    {
+        "code": "ANTM",
+        "name": "Aneka Tambang Tbk",
+        "currentPrice": 2400,
+        "prevPrice": 2450,
+        "sector": "Mining",
+        "description": "Perusahaan tambang milik negara, fokus pada emas dan nikel.",
+        "annualReturn": 9.2,
+        "img": "https://logo.clearbit.com/antam.com"
+    },
+    {
+        "code": "PGAS",
+        "name": "Perusahaan Gas Negara Tbk",
+        "currentPrice": 1400,
+        "prevPrice": 1320,
+        "sector": "Energy",
+        "description": "Distribusi dan infrastruktur gas nasional.",
+        "annualReturn": 4.7,
+        "img": "https://logo.clearbit.com/pgn.co.id"
+    },
+    {
+        "code": "MDKA",
+        "name": "Merdeka Copper Gold Tbk",
+        "currentPrice": 2500,
+        "prevPrice": 2400,
+        "sector": "Mining",
+        "description": "Perusahaan tambang tembaga dan emas.",
+        "annualReturn": 8.5,
+        "img": "https://logo.clearbit.com/merdekacoppergold.com"
+    },
+    {
+        "code": "GOTO",
+        "name": "GoTo Gojek Tokopedia Tbk",
+        "currentPrice": 120,
+        "prevPrice": 122,
+        "sector": "Technology",
+        "description": "Holding digital terbesar di Indonesia (ride hailing, e-commerce, fintech).",
+        "annualReturn": 3.1,
+        "img": "https://logo.clearbit.com/goto.com"
+    },
+    {
+        "code": "BRIS",
+        "name": "Bank Syariah Indonesia Tbk",
+        "currentPrice": 1600,
+        "prevPrice": 1520,
+        "sector": "Finance",
+        "description": "Bank syariah hasil merger anak usaha bank BUMN.",
+        "annualReturn": 6.3,
+        "img": "https://logo.clearbit.com/bsibank.co.id"
+    },
+    {
+        "code": "BMRI",
+        "name": "Bank Mandiri Tbk",
+        "currentPrice": 7250,
+        "prevPrice": 7400,
+        "sector": "Finance",
+        "description": "Bank BUMN terbesar dengan fokus retail dan korporat.",
+        "annualReturn": 6.7,
+        "img": "https://logo.clearbit.com/bankmandiri.co.id"
+    },
+    {
+        "code": "INDF",
+        "name": "Indofood Sukses Makmur Tbk",
+        "currentPrice": 6600,
+        "prevPrice": 6550,
+        "sector": "Consumer Goods",
+        "description": "Perusahaan induk dari ICBP dan bisnis agribisnis lainnya.",
+        "annualReturn": 5.5,
+        "img": "https://logo.clearbit.com/indofood.com"
+    },
+    {
+        "code": "SMGR",
+        "name": "Semen Indonesia Tbk",
+        "currentPrice": 6400,
+        "prevPrice": 6100,
+        "sector": "Construction",
+        "description": "Produsen semen terbesar di Indonesia.",
+        "annualReturn": 4.3,
+        "img": "https://logo.clearbit.com/semenindonesia.com"
+    },
+    {
+        "code": "ERAA",
+        "name": "Erajaya Swasembada Tbk",
+        "currentPrice": 500,
+        "prevPrice": 520,
+        "sector": "Retail",
+        "description": "Distributor resmi gadget dan elektronik seperti Apple, Samsung, dll.",
+        "annualReturn": 5.9,
+        "img": "https://logo.clearbit.com/erajaya.com"
+    }
+]
