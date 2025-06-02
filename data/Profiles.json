@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Budi santoso",
+        "typeInvestor": "Investor Konservatif",
+        "UserId": 1
+    },
+    {
+        "name": "Guest User",
+        "typeInvestor": "Investor Moderat",
+        "UserId": 2
+    },
+    {
+        "name": "Super Admin",
+        "typeInvestor": "Investor Agresif",
+        "UserId": 3
+    }
+]

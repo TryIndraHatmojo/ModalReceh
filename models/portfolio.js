@@ -11,6 +11,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+
+      // Super Many to Many
+      Portfolio.belongsTo(models.User)
+      Portfolio.belongsTo(models.Stock)
     }
   }
   Portfolio.init({

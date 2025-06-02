@@ -12,9 +12,6 @@ module.exports = {
       name: {
         type: Sequelize.STRING
       },
-      photo: {
-        type: Sequelize.STRING
-      },
       typeInvestor: {
         type: Sequelize.STRING
       },
