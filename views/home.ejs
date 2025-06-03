@@ -36,7 +36,7 @@ https://templatemo.com/tm-577-liberty-market
                 <nav class="main-nav">
                     <!-- ***** Logo Start ***** -->
                     <a href="/" class="logo">
-                        <img src="assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                        <img src="/assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
                     </a>
                     <!-- ***** Logo End ***** -->
                     <!-- ***** Menu Start ***** -->
@@ -78,10 +78,10 @@ https://templatemo.com/tm-577-liberty-market
         <div class="col-lg-5 offset-lg-1">
           <div class="owl-banner owl-carousel">
             <div class="item">
-              <img src="assets/images/investor.jpg" alt="" style="border-radius: 5%">
+              <img src="/assets/images/investor.jpg" alt="" style="border-radius: 5%">
             </div>
             <div class="item">
-              <img src="assets/images/investor-to-the-moon.jpg" alt="" style="border-radius: 5%;">
+              <img src="/assets/images/investor-to-the-moon.jpg" alt="" style="border-radius: 5%;">
             </div>
           </div>
         </div>
@@ -102,72 +102,28 @@ https://templatemo.com/tm-577-liberty-market
                   <h2>Explore Some <em>Trending Stocks</em> In Market.</h2>
                 </div>
               </div>
-              <div class="col-lg-2 col-sm-6">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-01.png" alt="">
+              <% stocks.forEach(el => { %>
+                  <div class="col-lg-2 col-sm-6 mb-5">
+                      <div class="item">
+                          <div class="icon">
+                              <img src="<%= el.img %>" alt="<%= el.code %>">
+                          </div>
+                          <h4><%= el.code %></h4>
+                          <h6><%= el.sector %></h6>
+                          <h6>
+                              <% if (el.currentPercent <0 ) { %>
+                                  <span class="text-danger"><%= el.currentPercent.toFixed(2) %> %</span>
+                              <% } else { %>
+                                  <span class="text-success">+ <%= el.currentPercent.toFixed(2) %> %</span>
+                              <% } %>
+                          </h6>
+                          <h6><%= formatRupiah(el.currentPrice) %></h6>
+                          <div class="icon-button">
+                              <a href="/dashboard"><i class="fa fa-angle-right"></i></a>
+                          </div>
+                      </div>
                   </div>
-                  <h4>Blockchain</h4>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-02.png" alt="">
-                  </div>
-                  <h4>Digital Art</h4>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-03.png" alt="">
-                  </div>
-                  <h4>Music Art</h4>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-04.png" alt="">
-                  </div>
-                  <h4>Virtual World</h4>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-05.png" alt="">
-                  </div>
-                  <h4>Valuable</h4>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-lg-2 col-sm-6">
-                <div class="item">
-                  <div class="icon">
-                    <img src="assets/images/icon-06.png" alt="">
-                  </div>
-                  <h4>Triple NFT</h4>
-                  <div class="icon-button">
-                    <a href="#"><i class="fa fa-angle-right"></i></a>
-                  </div>
-                </div>
-              </div>
+              <% }) %>
             </div>
           </div>
         </div>

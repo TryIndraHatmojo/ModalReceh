@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Modal Receh - Dashboard</title>
+</head>
+
+<body>
+
+    <%- include('partials/loading.ejs') %>
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="/assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/dashboard" class="active">Dashboard</a></li>
+                            <li><a href="/portfolio">Portfolio</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/profile" style="text-transform: none;"><%= username %>: <%= formatRupiah(balance) %></a></li>
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="categories-collections">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="categories">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="section-heading">
+                                    <div class="line-dec"></div>
+                                    <h2>Explore Some <em>Stocks</em> In Market.</h2>
+                                </div>
+                            </div>
+                            <% stocks.forEach(el => { %>
+                                <div class="col-lg-2 col-sm-6 mb-5">
+                                    <div class="item">
+                                        <div class="icon">
+                                            <img src="<%= el.img %>" alt="<%= el.code %>">
+                                        </div>
+                                        <h4><%= el.code %></h4>
+                                        <h6><%= el.sector %></h6>
+                                        <h6>
+                                            <% if (el.currentPercent <0 ) { %>
+                                                <span class="text-danger"><%= el.currentPercent.toFixed(2) %> %</span>
+                                            <% } else { %>
+                                                <span class="text-success">+ <%= el.currentPercent.toFixed(2) %> %</span>
+                                            <% } %>
+                                        </h6>
+                                        <h6><%= formatRupiah(el.currentPrice) %></h6>
+                                        <div class="icon-button">
+                                            <a href="/transaction/buy/<%= el.id %>"><i class="fa fa-angle-right"></i></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+    <script src="/assets/js/transaction.js"></script>
+</body>
+</html>

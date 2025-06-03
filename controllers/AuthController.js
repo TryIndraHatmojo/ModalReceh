@@ -17,6 +17,7 @@ class AuthController {
             req.session.UserId = data.id
             req.session.role = data.role
             req.session.username = data.username
+            req.session.balance = data.balance
             res.redirect("/dashboard")
         } catch (error) {
             res.send(error)

@@ -16,6 +16,33 @@ module.exports = (sequelize, DataTypes) => {
       Portfolio.belongsTo(models.User)
       Portfolio.belongsTo(models.Stock)
     }
+    static async createOrUpdatePortfolio(StockId, UserId){
+        try {
+            let userStockData = await sequelize.models.Transaction.userStockData(StockId, UserId)
+            userStockData = userStockData[0].dataValues
+
+            const portfolio = await Portfolio.findOne({
+                where:{
+                    StockId, UserId
+                }
+            })
+            if(portfolio){
+                await portfolio.update({
+                    qty: userStockData.qty,
+                    avgBuyPrice: userStockData.avgBuyPrice,
+                })
+            }else{
+                await Portfolio.create({
+                    qty: userStockData.qty,
+                    avgBuyPrice: userStockData.avgBuyPrice,
+                    UserId,
+                    StockId
+                })
+            }
+        } catch (error) {
+            throw error
+        }
+    }
   }
   Portfolio.init({
     qty: DataTypes.INTEGER,

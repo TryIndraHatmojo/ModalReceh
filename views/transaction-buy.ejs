@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Modal Receh - Buy Stocks</title>
+</head>
+
+<body>
+
+    <%- include('partials/loading.ejs') %>
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="/assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/dashboard" class="active">Dashboard</a></li>
+                            <li><a href="/portfolio">Portfolio</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/profile" style="text-transform: none;"><%= username %>: <%= formatRupiah(balance) %></a></li>
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="item-details-page">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>Buy <em><%= stock.code %></em> Stocks</h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-3">
+                    <form id="contact" action="/transaction/buy/<%= stock.id %>" method="post">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 for="price" class="text-center m-2">Price</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="price" class="rounded-1 mb-3" value="<%= formatRupiah(stock.currentPrice) %>" readonly>
+                                <input type="hidden" name="price" value="<%= stock.currentPrice %>">
+                            </div>
+                            <div class="col-sm-4">
+                                <h4 for="totalPrice" class="text-center m-2">Total Investment</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="totalPrice" class="rounded-1 mb-3" readonly>
+                                <input type="hidden" name="totalPrice">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 for="qty" class="text-center m-2">Buy Order Lot</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" name="qty" id="qty" class="rounded-1 mb-3" oninput="hitungTotalPrice()" style="width: 120px;">
+                            </div>
+                            
+                            <div class="col-lg-12">
+                                <button type="submit" class="icon-button">Buy</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+    <script src="/assets/js/helper.js"></script>
+    <script src="/assets/js/transaction.js"></script>
+</body>
+</html>

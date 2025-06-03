@@ -6,8 +6,12 @@ const isLoggedIn = (req,res,next) => {
     }
 }
 
-const isLogout = () => {
-
+const isLogout = (req,res,next) => {
+    if (req.session.UserId) {
+        res.redirect(`/dashboard`)
+    } else {
+        next()
+    }
 }
 
 
