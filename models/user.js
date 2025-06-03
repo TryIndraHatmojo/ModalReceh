@@ -86,6 +86,15 @@ module.exports = (sequelize, DataTypes) => {
     balance: DataTypes.BIGINT,
     role: DataTypes.STRING
   }, {
+    hooks: {
+      beforeCreate(instance, options) {
+        console.log(instance)
+        const salt = bcrypt.genSaltSync(8);
+        const hash = bcrypt.hashSync(instance.password, salt);
+        
+        instance.password = hash
+      }
+    },
     sequelize,
     modelName: 'User',
   });
