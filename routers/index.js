@@ -14,6 +14,11 @@ router.get("/login", isLogout, AuthController.login)
 router.post("/login", isLogout, AuthController.loginPost)
 router.get("/logout", AuthController.logout)
 
+router.use((req, res, next) => {
+  console.log('Time:', Date.now())
+  next()
+})
+
 router.get("/register", RegisterController.register)
 router.post("/register", RegisterController.registerPost)
 
