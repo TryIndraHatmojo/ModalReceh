@@ -88,8 +88,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     hooks: {
       beforeCreate(instance, options) {
-        console.log(instance)
-        const salt = bcrypt.genSaltSync(8);
+        const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(instance.password, salt);
         
         instance.password = hash
