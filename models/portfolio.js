@@ -16,6 +16,23 @@ module.exports = (sequelize, DataTypes) => {
       Portfolio.belongsTo(models.User)
       Portfolio.belongsTo(models.Stock)
     }
+
+    get invested(){
+      return this.avgBuyPrice * this.qty * 100
+    }
+
+    profitLoss(currentPrice){
+      let invested = this.avgBuyPrice * this.qty * 100
+      let currentTotal = currentPrice * this.qty * 100
+      return invested - currentTotal
+    }
+
+    profitLossPercent(currentPrice){
+      let invested = this.avgBuyPrice * this.qty * 100
+      let currentTotal = currentPrice * this.qty * 100
+      return (invested - currentTotal) / invested * 100
+    }
+
     static async createOrUpdatePortfolio(StockId, UserId){
         try {
             let userStockData = await sequelize.models.Transaction.userStockData(StockId, UserId)

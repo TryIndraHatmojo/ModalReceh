@@ -6,7 +6,7 @@ class PortfolioController {
     static async portfolio(req, res){
         try {
             const { username, UserId, balance } = req.session
-            const data = await User.findAll({
+            const portfolios = await User.findAll({
                 include: [{
                     model: Stock,
                 }],
@@ -14,8 +14,9 @@ class PortfolioController {
                     id: UserId
                 }
             })
-            res.send(data)
-            // res.render("portfolio", {username, UserId, balance, formatRupiah})
+            
+            // res.send(data)
+            res.render("portfolio", {username, UserId, balance, formatRupiah, portfolios})
         } catch (error) {
             res.send(error)
         }

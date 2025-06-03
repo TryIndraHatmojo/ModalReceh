@@ -5,6 +5,7 @@ class HomeController {
 
     static async home(req, res){
         try {
+            const { UserId } = req.session
             const stocks = await Stock.findAll({
                 limit:6
             })

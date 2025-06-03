@@ -22,8 +22,12 @@ class TransactionController {
             let { price, totalPrice, qty } = req.body
             const type = "Buy"
 
-            await User.reduceBalanceUser(UserId, Number(totalPrice))
-            console.log("tes1");
+            const user = await User.reduceBalanceUser(UserId, Number(totalPrice))
+
+            req.session.UserId = user.id
+            req.session.role = user.role
+            req.session.username = user.username
+            req.session.balance = user.balance
             
             await Transaction.create({
                 price, totalPrice, qty, UserId, StockId, type
