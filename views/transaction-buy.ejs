@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head.ejs') %>
-    <title>Modal Receh - Dashboard</title>
+    <title>Modal Receh - Buy Stocks</title>
 </head>
 
 <body>
@@ -16,15 +16,15 @@
                     <nav class="main-nav">
                         <!-- ***** Logo Start ***** -->
                         <a href="/" class="logo">
-                            <img src="assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                            <img src="/assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
                         </a>
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
                             <li><a href="/dashboard" class="active">Dashboard</a></li>
                             <li><a href="/portfolio">Portfolio</a></li>
-                            <li><a href="/profile"><%= username %></a></li>
                             <li><a href="/logout">Logout</a></li>
+                            <li><a href="/profile" style="text-transform: none;"><%= username %>: <%= formatRupiah(balance) %></a></li>
                         </ul>   
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -36,28 +36,43 @@
         </div>
     </header>
     
-    <div class="categories-collections">
+    <div class="item-details-page">
         <div class="container">
+            
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <div class="line-dec"></div>
-                        <h2><em>Login</em></h2>
+                        <h2>Buy <em><%= stock.code %></em> Stocks</h2>
                     </div>
                 </div>
-                <div class="col-lg-4 offset-lg-4">
-                    <form id="contact" action="/login" method="post">
+                <div class="col-lg-6 offset-lg-3">
+                    <form id="contact" action="/transaction/buy/<%= stock.id %>" method="post">
                         <div class="row">
-                            <div class="col-lg-12">
-                                <h4 for="email" class="text-center m-2">Email</h4>
-                                <input type="email" name="email" id="email" placeholder="guest user: guest@example.com" value="guest@example.com">
+                            <div class="col-sm-4">
+                                <h4 for="price" class="text-center m-2">Price</h4>
                             </div>
-                            <div class="col-lg-12">
-                                <h4 for="password" class="text-center m-2">Password</h4>
-                                <input type="password" name="password" placeholder="guest password: p4ssword" value="p4ssword">
+                            <div class="col-sm-8">
+                                <input type="text" id="price" class="rounded-1 mb-3" value="<%= formatRupiah(stock.currentPrice) %>" readonly>
+                                <input type="hidden" name="price" value="<%= stock.currentPrice %>">
                             </div>
+                            <div class="col-sm-4">
+                                <h4 for="totalPrice" class="text-center m-2">Total Investment</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" id="totalPrice" class="rounded-1 mb-3" readonly>
+                                <input type="hidden" name="totalPrice">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 for="qty" class="text-center m-2">Buy Order Lot</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" name="qty" id="qty" class="rounded-1 mb-3" oninput="hitungTotalPrice()" style="width: 120px;">
+                            </div>
+                            
                             <div class="col-lg-12">
-                                <button type="submit" class="orange-button">Login</button>
+                                <button type="submit" class="icon-button">Buy</button>
                             </div>
                         </div>
                     </form>
@@ -67,6 +82,7 @@
     </div>
 
     <%- include('partials/footer.ejs') %>
-
+    <script src="/assets/js/helper.js"></script>
+    <script src="/assets/js/transaction.js"></script>
 </body>
 </html>

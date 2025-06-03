@@ -10,7 +10,7 @@
         "username": "guest_user",
         "email": "guest@example.com",
         "password": "p4ssword",
-        "balance": 1000000,
+        "balance": 100000000,
         "role": "user"
     },
     {

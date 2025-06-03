@@ -23,7 +23,7 @@ router.get("/dashboard", isLoggedIn, DashboardController.dashboard)
 
 router.use("/transaction", transaction)
 router.use("/stocks", stocks)
-router.use("/protfolio", portfolio)
+router.use("/portfolio", portfolio)
 
 
 

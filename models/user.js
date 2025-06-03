@@ -51,6 +51,33 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
 
+    static async addBalanceUser(UserId, totalPrice){
+        try {
+            const user = await User.findByPk(UserId)
+            const balance = user.balance + totalPrice
+            await user.update({
+                balance
+            })
+            return user
+        } catch (error) {
+            throw error
+        }
+    }
+
+    static async reduceBalanceUser(UserId, totalPrice){
+        try {
+            const user = await User.findByPk(UserId)
+            console.log(user);
+            
+            const balance = user.balance - totalPrice
+            await user.update({
+                balance
+            })
+            return user
+        } catch (error) {
+            throw error
+        }
+    }
   }
   User.init({
     username: DataTypes.STRING,

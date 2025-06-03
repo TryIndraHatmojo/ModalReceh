@@ -1,6 +1,7 @@
 'use strict';
 const {
-  Model
+  Model,
+  where
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Transaction extends Model {
@@ -13,6 +14,26 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
       Transaction.belongsTo(models.User)
       Transaction.belongsTo(models.Stock)
+    }
+
+    static async userStockData(StockId, UserId){
+      try {
+        const transactions = await Transaction.findAll({
+          where:{
+            StockId,
+            UserId,
+            type: "Buy"
+          },
+          attributes: [
+            [sequelize.fn('ROUND', sequelize.fn('AVG', sequelize.col('price'))), 'avgBuyPrice'],
+            [sequelize.fn('SUM', sequelize.col('qty')), 'qty']
+          ]
+        })
+        
+        return transactions
+      } catch (error) {
+        throw error
+      }
     }
   }
   Transaction.init({

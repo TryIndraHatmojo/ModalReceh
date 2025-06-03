@@ -1,4 +1,3 @@
-// const { User, Stock, Transaction, Portfolio, Profile } = require("../models")
 const { Stock, Transaction, Portfolio } = require("../models")
 const { formatRupiah } = require("../helpers/helper")
 
