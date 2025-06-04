@@ -2,6 +2,8 @@
 const {
   Model
 } = require('sequelize');
+const { randomStockPrice } = require("../helpers/helper")
+
 module.exports = (sequelize, DataTypes) => {
   class Stock extends Model {
     /**
@@ -22,6 +24,17 @@ module.exports = (sequelize, DataTypes) => {
       const returnPercent = ((this.currentPrice - this.prevPrice) / this.prevPrice) * 100;
       return returnPercent
     }
+
+    static async updateAllStockPrice(){
+      const stocks = await Stock.findAll()
+      stocks.forEach(async stock => {
+        await stock.update({
+          currentPrice: randomStockPrice(stock.currentPrice),
+          prevPrice: randomStockPrice(stock.prevPrice),
+        })
+      });
+    }
+
   }
   Stock.init({
     name: {

@@ -59,7 +59,8 @@ class TransactionController {
                 include:{
                     model: Transaction,
                     where: {
-                        UserId
+                        UserId,
+                        type: "Buy"
                     }
                 },
                 where:{

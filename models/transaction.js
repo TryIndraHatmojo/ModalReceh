@@ -19,13 +19,13 @@ module.exports = (sequelize, DataTypes) => {
     profitLoss(currentPrice){
       let invested = this.totalPrice
       let currentTotal = currentPrice * this.qty * 100
-      return invested - currentTotal
+      return currentTotal - invested
     }
 
     profitLossPercent(currentPrice){
       let invested = this.totalPrice
       let currentTotal = currentPrice * this.qty * 100
-      return (invested - currentTotal) / invested * 100
+      return ( currentTotal - invested) / currentTotal * 100
     }
 
     static async userStockData(StockId, UserId){

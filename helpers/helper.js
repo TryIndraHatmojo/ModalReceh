@@ -8,4 +8,9 @@ function formatDateLocal(date){
     return new Date(date).toLocaleString('id-ID',{year:'numeric', month:'2-digit', day:'2-digit',hour:"2-digit",minute:"2-digit"}).replace(".",":"); // dd-mm-yyyy
 }
 
-module.exports = { formatRupiah, formatDateLocal }
+function randomStockPrice(price){
+    let profitLossPercent = Math.random() * (2 - (-2) ) + (-2)
+    return parseInt(price + (price*profitLossPercent/100))
+}
+
+module.exports = { formatRupiah, formatDateLocal, randomStockPrice }

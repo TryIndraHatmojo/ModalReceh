@@ -16,6 +16,8 @@ class DashboardController {
                         [Op.iLike]: `%${search}%`
                     }
                 }
+            }else{
+                await Stock.updateAllStockPrice()
             }
 
             const stocks = await Stock.findAll(opt)
