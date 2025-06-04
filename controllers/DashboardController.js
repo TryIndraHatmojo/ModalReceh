@@ -5,9 +5,9 @@ class DashboardController {
 
     static async dashboard(req, res){
         try {
-            const { username, balance } = req.session
+            const { username, balance, role } = req.session
             const stocks = await Stock.findAll()
-            res.render("dashboard", { stocks, username, balance, formatRupiah })
+            res.render("dashboard", { stocks, username, balance, formatRupiah, role })
         } catch (error) {
             res.send(error)
         }

@@ -10,8 +10,6 @@ class HomeController {
                 limit:6
             })
             res.render("home", { stocks, formatRupiah })
-            console.log(req.session);
-            
         } catch (error) {
             res.send(error)
         }

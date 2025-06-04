@@ -35,6 +35,11 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Stock',
+    hooks: {
+      beforeCreate(instance){
+        instance.name = instance.name+" Tbk"
+      }
+    }
   });
   return Stock;
 };
