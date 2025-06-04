@@ -46,28 +46,39 @@
                         <h2>Add <em>Stock</em></h2>
                     </div>
                 </div>
+                <% if (errors) { %>
+                    <div class="col-lg-6 offset-lg-3 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong class="text-center">Error !</strong>
+                        <ul style="padding-left: 20px;">
+                            <% errors.split(",").forEach(el => { %>
+                                <li style="list-style: disc !important;"><%= el %></li>
+                            <% }) %>
+                        </ul>
+                        <a href="javascript:;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+                    </div>
+                <% } %>
                 <div class="col-lg-6 offset-lg-3">
                     <form id="contact" action="/stocks/add" method="post">
                         <div class="row">
                             <div class="col-sm-4">
-                                <h4 class="m-2">Code</h4>
+                                <h4 class="m-2">Code <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-sm-8">
                                 <input type="text" name="code" class="rounded-1 mb-3">
                             </div>
 
                             <div class="col-sm-4">
-                                <h4 class="m-2">Name</h4>
+                                <h4 class="m-2">Name <span class="text-danger">*</span></h4>
                             </div>
-                            <div class="col-sm-6">
+                            <div class="col-sm-8">
                                 <input type="text" name="name" class="rounded-1 mb-3">
                             </div>
-                            <div class="col-sm-2">
+                            <!-- <div class="col-sm-2">
                                 <h4 class="m-2">Tbk</h4>
-                            </div>
+                            </div> -->
 
                             <div class="col-sm-4">
-                                <h4 class="m-2">Sector</h4>
+                                <h4 class="m-2">Sector <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-sm-8">
                                 <% const sectors = ["Finance", "Telecommunication" ] %>
@@ -75,28 +86,28 @@
                             </div>
 
                             <div class="col-sm-4">
-                                <h4 class="m-2">Current Price</h4>
+                                <h4 class="m-2">Current Price <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-sm-8">
                                 <input type="number" name="currentPrice" class="rounded-1 mb-3">
                             </div>
 
                             <div class="col-sm-4">
-                                <h4 class="m-2">Previous Price</h4>
+                                <h4 class="m-2">Previous Price <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-sm-8">
                                 <input type="number" name="prevPrice" class="rounded-1 mb-3">
                             </div>
 
-                            <div class="col-sm-4">
-                                <h4 class="m-2">Annual Return(%)</h4>
+                            <div class="col-sm-5">
+                                <h4 class="m-2">Annual Return(%)<span class="text-danger">*</span></h4>
                             </div>
-                            <div class="col-sm-8">
+                            <div class="col-sm-7">
                                 <input type="number" name="annualReturn" class="rounded-1 mb-3">
                             </div>
 
                             <div class="col-sm-4">
-                                <h4 class="m-2">Image Icon URL</h4>
+                                <h4 class="m-2">Image Icon URL <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-sm-8">
                                 <input type="text" name="img" class="rounded-1 mb-3">

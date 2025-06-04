@@ -1,0 +1,9 @@
+const express = require("express")
+const router = express.Router()
+const { isAdmin, isLoggedIn, isLogout } = require("../middleware/authMiddleware")
+const ProfileController = require("../controllers/ProfileController")
+
+router.get("/", isLoggedIn, ProfileController.profile)
+router.post("/edit/:id", isLoggedIn, ProfileController.profileUpdate)
+
+module.exports = router

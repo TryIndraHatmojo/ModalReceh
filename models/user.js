@@ -67,8 +67,6 @@ module.exports = (sequelize, DataTypes) => {
     static async reduceBalanceUser(UserId, totalPrice){
         try {
             const user = await User.findByPk(UserId)
-            console.log(user);
-            
             const balance = user.balance - totalPrice
             await user.update({
                 balance
@@ -80,10 +78,69 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   User.init({
-    username: DataTypes.STRING,
-    password: DataTypes.STRING,
-    email: DataTypes.STRING,
-    balance: DataTypes.BIGINT,
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Username is required"
+        },
+        notEmpty:{
+          msg: "Username is required"
+        },
+        len: {
+          args: [8, 20],
+          msg: "Username length minimum 8 and maximum 20"
+        },
+        is:{
+          args: /^[a-zA-Z0-9_]*$/,
+          msg: "Username must contain only alphanumeric characters and underscores"
+        }
+      }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Password is required"
+        },
+        notEmpty:{
+          msg: "Password is required"
+        },
+        len: {
+          args: [8],
+          msg: "Password length must 8 characters or more"
+        }
+      }
+    },
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: {
+        msg: 'Email is already taken'
+      },
+      validate: {
+        notNull:{
+          msg: "Email is required"
+        },
+        notEmpty:{
+          msg: "Email is required"
+        },
+        isEmail: {
+          msg: "Email format is not valid"
+        }
+      }
+    },
+    balance: {
+      type: DataTypes.BIGINT,
+      validate: {
+        min: {
+          args: [0],
+          msg: "Insufficient balance on payment"
+        }
+      }
+    },
     role: DataTypes.STRING
   }, {
     hooks: {

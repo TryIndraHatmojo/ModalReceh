@@ -5,7 +5,8 @@ class RegisterController {
 
     static register(req, res){
         try {
-            res.render("home-register")
+            const {errors} = req.query
+            res.render("home-register", {errors})
         } catch (error) {
             res.send(error)
         }
@@ -15,16 +16,19 @@ class RegisterController {
         try {
             const { username, password, email } = req.body
 
-            User.create({ username, password, email, role: "User" })
-                .then(newUser => {
-                    req.session.UserId = newUser.id
-                    req.session.role = newUser.role
-                    req.session.username = newUser.username
-                    req.session.balance = newUser.balance
-                    res.redirect("/dashboard")
-                })
+            const newUser = await User.create({ username, password, email, role: "User" })
+            req.session.UserId = newUser.id
+            req.session.role = newUser.role
+            req.session.username = newUser.username
+            req.session.balance = newUser.balance
+            res.redirect("/dashboard")
         } catch (error) {
-            res.send(error)
+            if(error.name=== "SequelizeValidationError" || error.name === "SequelizeUniqueConstraintError"){
+                const errors = error.errors.map(el=>el.message)
+                res.redirect("/register?errors="+errors)
+            }else{
+                res.send(error)
+            }
         }
     }
 

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head.ejs') %>
-    <title>Modal Receh - Buy Stocks</title>
+    <title>Modal Receh - Profile</title>
 </head>
 
 <body>
@@ -21,11 +21,11 @@
                         <!-- ***** Logo End ***** -->
                         <!-- ***** Menu Start ***** -->
                         <ul class="nav">
-                            <li><a href="/dashboard" class="active">Dashboard</a></li>
+                            <li><a href="/dashboard">Dashboard</a></li>
                             <li><a href="/portfolio">Portfolio</a></li>
                             <li><a href="/stocks">Stocks</a></li>
                             <li><a href="/logout">Logout</a></li>
-                            <li><a href="/profile" style="text-transform: none;"><%= username %>: <%= formatRupiah(balance) %></a></li>
+                            <li><a href="/profile" style="text-transform: none;" class="active"><%= username %>: <%= formatRupiah(balance) %></a></li>
                         </ul>   
                         <a class='menu-trigger'>
                             <span>Menu</span>
@@ -37,16 +37,21 @@
         </div>
     </header>
     
-    <div class="item-details-page">
+    <div class="item-details-page" style="padding-bottom: 170px;">
         <div class="container">
             
             <div class="row">
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <div class="line-dec"></div>
-                        <h2>Buy <em><%= stock.code %></em> Stocks</h2>
+                        <h2>Your <em>Profile</em></h2>
                     </div>
                 </div>
+                <% if (status === "updated") { %>
+                    <div class="alert alert-primary" role="alert">
+                        <strong>Profile</strong> has been updated
+                    </div>
+                <% } %>
                 <% if (errors) { %>
                     <div class="col-lg-6 offset-lg-3 alert alert-danger alert-dismissible fade show" role="alert">
                         <strong class="text-center">Error !</strong>
@@ -59,32 +64,44 @@
                     </div>
                 <% } %>
                 <div class="col-lg-6 offset-lg-3">
-                    <form id="contact" action="/transaction/buy/<%= stock.id %>" method="post">
+                    <form id="contact" action="profile/edit/<%= data.id %>" method="post">
                         <div class="row">
-                            <div class="col-sm-4">
-                                <h4 for="price" class="text-center m-2">Price</h4>
+                            <div class="col-lg-4">
+                                <h4 for="name" class="m-2">Full Name</h4>
                             </div>
-                            <div class="col-sm-8">
-                                <input type="text" id="price" class="rounded-1 mb-3" value="<%= formatRupiah(stock.currentPrice) %>" readonly>
-                                <input type="hidden" name="price" value="<%= stock.currentPrice %>">
-                            </div>
-                            <div class="col-sm-4">
-                                <h4 for="totalPrice" class="text-center m-2">Total Investment</h4>
-                            </div>
-                            <div class="col-sm-8">
-                                <input type="text" id="totalPrice" class="rounded-1 mb-3" readonly>
-                                <input type="hidden" name="totalPrice">
+                            <div class="col-lg-8">
+                                <input type="text" name="name" id="name" value="<%= data.Profile ? data.Profile.name :"" %>">
                             </div>
 
-                            <div class="col-sm-4">
-                                <h4 for="qty" class="text-center m-2">Qty Lot</h4>
+                            <div class="col-lg-4">
+                                <h4 for="typeInvestor" class="m-2">Type Investor</h4>
                             </div>
-                            <div class="col-sm-8">
-                                <input type="number" name="qty" id="qty" class="rounded-1 mb-3" oninput="hitungTotalPrice()" style="width: 120px;">
+                            <div class="col-lg-8">
+                                <% const investors = ["Investor Konservatif","Investor Moderat","Investor Agresif"] %>
+                                <select name="typeInvestor" id="typeInvestor" class="form-control mb-3" style="border-radius: 23px;background-color:#282b2f;color:#afafaf;border:1px solid #404245;border-color:#404245 !important">
+                                    <option value="">--Select--</option>
+                                    <% investors.forEach(el => { %>
+                                        <option value="<%= el %>" <%= (data.Profile && data.Profile.typeInvestor) === el ? "selected" : "" %> ><%= el %></option>
+                                    <% }) %>
+                                </select>
                             </div>
-                            
+
+                            <div class="col-lg-4">
+                                <h4 for="username" class="m-2">Username <span class="text-danger">*</span></h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="username" name="username" id="username" value="<%= data.username %>">
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h4 for="email" class="m-2">Email <span class="text-danger">*</span></h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="email" name="email" id="email" value="<%= data.email %>">
+                            </div>
+
                             <div class="col-lg-12">
-                                <button type="submit" class="icon-button">Buy</button>
+                                <button type="submit" class="icon-button">Submit</button>
                             </div>
                         </div>
                     </form>
