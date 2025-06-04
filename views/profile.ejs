@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Modal Receh - Profile</title>
+</head>
+
+<body>
+
+    <%- include('partials/loading.ejs') %>
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="/assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/portfolio">Portfolio</a></li>
+                            <li><a href="/stocks">Stocks</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/profile" style="text-transform: none;" class="active"><%= username %>: <%= formatRupiah(balance) %></a></li>
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="item-details-page" style="padding-bottom: 170px;">
+        <div class="container">
+            
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>Your <em>Profile</em></h2>
+                    </div>
+                </div>
+                <% if (status === "updated") { %>
+                    <div class="alert alert-primary" role="alert">
+                        <strong>Profile</strong> has been updated
+                    </div>
+                <% } %>
+                <div class="col-lg-6 offset-lg-3">
+                    <form id="contact" action="profile/edit/<%= data.UserId %>" method="post">
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <h4 for="name" class="m-2">Full Name</h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="text" name="name" id="name" value="<%= data.name %>">
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h4 for="typeInvestor" class="m-2">Type Investor</h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <% const investors = ["Investor Konservatif","Investor Moderat","Investor Agresif"] %>
+                                <select name="typeInvestor" id="typeInvestor" class="form-control mb-3" style="border-radius: 23px;background-color:#282b2f;color:#afafaf;border:1px solid #404245;border-color:#404245 !important">
+                                    <% investors.forEach(el => { %>
+                                        <option value="<%= el %>" <%= data.typeInvestor === el ? "selected" : "" %> ><%= el %></option>
+                                    <% }) %>
+                                </select>
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h4 for="username" class="m-2">Username</h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="username" name="username" id="username" value="<%= data.User.username %>">
+                            </div>
+
+                            <div class="col-lg-4">
+                                <h4 for="email" class="m-2">Email</h4>
+                            </div>
+                            <div class="col-lg-8">
+                                <input type="email" name="email" id="email" value="<%= data.User.email %>">
+                            </div>
+
+                            <div class="col-lg-12">
+                                <button type="submit" class="icon-button">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+    <script src="/assets/js/helper.js"></script>
+    <script src="/assets/js/transaction.js"></script>
+</body>
+</html>

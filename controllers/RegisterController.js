@@ -15,14 +15,12 @@ class RegisterController {
         try {
             const { username, password, email } = req.body
 
-            User.create({ username, password, email, role: "User" })
-                .then(newUser => {
-                    req.session.UserId = newUser.id
-                    req.session.role = newUser.role
-                    req.session.username = newUser.username
-                    req.session.balance = newUser.balance
-                    res.redirect("/dashboard")
-                })
+            const newUser = await User.create({ username, password, email, role: "User" })
+            req.session.UserId = newUser.id
+            req.session.role = newUser.role
+            req.session.username = newUser.username
+            req.session.balance = newUser.balance
+            res.redirect("/dashboard")
         } catch (error) {
             res.send(error)
         }

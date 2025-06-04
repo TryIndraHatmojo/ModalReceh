@@ -9,6 +9,7 @@ const DashboardController = require("../controllers/DashboardController")
 const stocks = require("./stocks")
 const transaction = require("./transaction")
 const portfolio = require("./portfolio")
+const profile  = require("./profile")
 
 router.get("/", HomeController.home)
 
@@ -24,6 +25,7 @@ router.get("/dashboard", isLoggedIn, DashboardController.dashboard)
 router.use("/transaction", transaction)
 router.use("/stocks", stocks)
 router.use("/portfolio", portfolio)
+router.use("/profile", profile)
 
 
 
