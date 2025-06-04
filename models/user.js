@@ -54,7 +54,7 @@ module.exports = (sequelize, DataTypes) => {
     static async addBalanceUser(UserId, totalPrice){
         try {
             const user = await User.findByPk(UserId)
-            const balance = user.balance + totalPrice
+            const balance = Number(user.balance) + Number(totalPrice)
             await user.update({
                 balance
             })

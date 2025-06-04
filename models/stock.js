@@ -28,9 +28,10 @@ module.exports = (sequelize, DataTypes) => {
     static async updateAllStockPrice(){
       const stocks = await Stock.findAll()
       stocks.forEach(async stock => {
+        const price = stock.currentPrice
         await stock.update({
           currentPrice: randomStockPrice(stock.currentPrice),
-          prevPrice: randomStockPrice(stock.prevPrice),
+          prevPrice: price,
         })
       });
     }

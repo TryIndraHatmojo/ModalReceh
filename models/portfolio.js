@@ -30,7 +30,11 @@ module.exports = (sequelize, DataTypes) => {
     profitLossPercent(currentPrice){
       let invested = this.avgBuyPrice * this.qty * 100
       let currentTotal = currentPrice * this.qty * 100
-      return (currentTotal- invested) / currentTotal * 100
+      let percent = (currentTotal- invested) / currentTotal * 100
+      if(isNaN(percent)){
+        percent = 0
+      }
+      return percent
     }
 
     static async createOrUpdatePortfolio(StockId, UserId){
