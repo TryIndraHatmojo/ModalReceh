@@ -12,7 +12,8 @@ class PortfolioController {
                 }],
                 where: {
                     id: UserId
-                }
+                },
+                order: [[Stock, Portfolio, 'createdAt', 'DESC']],
             })
             
             // res.send(data)

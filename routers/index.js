@@ -15,12 +15,14 @@ router.get("/", HomeController.home)
 
 router.get("/login", isLogout, AuthController.login)
 router.post("/login", isLogout, AuthController.loginPost)
-router.get("/logout", isLoggedIn, AuthController.logout)
 
 router.get("/register", isLogout, RegisterController.register)
 router.post("/register", isLogout, RegisterController.registerPost)
 
-router.get("/dashboard", isLoggedIn, DashboardController.dashboard)
+router.use(isLoggedIn)
+
+router.get("/logout", AuthController.logout)
+router.get("/dashboard", DashboardController.dashboard)
 
 router.use("/transaction", transaction)
 router.use("/stocks", stocks)
