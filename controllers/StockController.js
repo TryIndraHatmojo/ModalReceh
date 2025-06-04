@@ -32,7 +32,8 @@ class StockController {
     static async stocksAdd(req, res){
         try {
             const { username, balance, role } = req.session
-            res.render("stocks-add", {username, balance, formatRupiah})
+            const {errors} = req.query
+            res.render("stocks-add", {username, balance, formatRupiah, errors})
         } catch (error) {
             res.send(error)
         }
@@ -62,7 +63,12 @@ class StockController {
             })
             res.redirect(`/stocks/?status=add&code=${data.code}`)
         } catch (error) {
-            res.send(error)
+            if(error.name=== "SequelizeValidationError"){
+                const errors = error.errors.map(el=>el.message)
+                res.redirect("/stocks/add?errors="+errors)
+            }else{
+                res.send(error)
+            }
         }
     }
 
@@ -72,8 +78,9 @@ class StockController {
             const {StockId} = req.params
 
             const data = await Stock.findByPk(StockId)
-
-            res.render("stocks-edit", {username, balance, formatRupiah, data})
+            
+            const {errors} = req.query
+            res.render("stocks-edit", {username, balance, formatRupiah, data, errors})
         } catch (error) {
             res.send(error)
         }
@@ -107,7 +114,13 @@ class StockController {
 
             res.redirect(`/stocks/?status=edit&code=${data.code}`)
         } catch (error) {
-            res.send(error)
+            const {StockId} = req.params
+            if(error.name=== "SequelizeValidationError"){
+                const errors = error.errors.map(el=>el.message)
+                res.redirect(`/stocks/edit/${StockId}?errors=`+errors)
+            }else{
+                res.send(error)
+            }
         }
     }
 

@@ -24,22 +24,110 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Stock.init({
-    name: DataTypes.STRING,
-    code: DataTypes.STRING,
-    currentPrice: DataTypes.INTEGER,
-    annualReturn: DataTypes.FLOAT,
+    name: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Name is required"
+        },
+        notEmpty:{
+          msg: "Name is required"
+        }
+      }
+    },
+    code: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Code is required"
+        },
+        notEmpty:{
+          msg: "Code is required"
+        }
+      }
+    },
+    currentPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Current Price is required"
+        },
+        notEmpty:{
+          msg: "Current Price is required"
+        },
+        min: {
+          args: [1],
+          msg: "Minimum Current Price is 1"
+        }
+      }
+    },
+    annualReturn: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Annual Return is required"
+        },
+        notEmpty:{
+          msg: "Annual Return is required"
+        }
+      }
+    },
     description: DataTypes.STRING,
-    sector: DataTypes.STRING,
-    img: DataTypes.STRING,
-    prevPrice: DataTypes.INTEGER
+    sector: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Sector is required"
+        },
+        notEmpty:{
+          msg: "Sector is required"
+        }
+      }
+    },
+    img: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Image Icon URL is required"
+        },
+        notEmpty:{
+          msg: "Image Icon URL is required"
+        },
+        isUrl: {
+          msg : "Image Icon URL is not valid URL"
+        }
+      }
+    },
+    prevPrice: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate: {
+        notNull:{
+          msg: "Previous Price is required"
+        },
+        notEmpty:{
+          msg: "Previous Price is required"
+        },
+        min: {
+          args: [1],
+          msg: "Minimum Previous Price is 1"
+        }
+      }
+    }
   }, {
     sequelize,
     modelName: 'Stock',
-    hooks: {
-      beforeCreate(instance){
-        instance.name = instance.name+" Tbk"
-      }
-    }
+    // hooks: {
+    //   beforeCreate(instance){
+    //     instance.name = instance.name+" Tbk"
+    //   }
+    // }
   });
   return Stock;
 };

@@ -49,7 +49,22 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
   Transaction.init({
-    qty: DataTypes.INTEGER,
+    qty: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      validate:{
+        notNull:{
+          msg: "Qty is required"
+        },
+        notEmpty:{
+          msg: "Qty is required"
+        },
+        min: {
+          args: [1],
+          msg: "Minimum Qty is 1"
+        }
+      }
+    },
     price: DataTypes.INTEGER,
     totalPrice: DataTypes.BIGINT,
     UserId: DataTypes.INTEGER,

@@ -6,17 +6,16 @@ class ProfileController {
     static async profile(req, res){
         try {
             const { username, UserId, balance, role } = req.session
-            const data = await Profile.findOne({
+            console.log(UserId);
+            
+            const data = await User.findByPk(UserId, {
                 include:{
-                    model : User
-                },
-                where :{
-                    UserId
+                    model : Profile
                 }
             })
 
-            const { status } = req.query
-            res.render("profile", { username, UserId, balance, data, formatRupiah, status })
+            const { status, errors } = req.query
+            res.render("profile", { username, UserId, balance, data, formatRupiah, status, errors })
             // res.send(data)
         } catch (error) {
             res.send(error)
@@ -40,13 +39,24 @@ class ProfileController {
                     UserId
                 }
             })
-            await profile.update({
-                name, typeInvestor
-            })
+            if(profile){
+                await profile.update({
+                    name, typeInvestor
+                })
+            }else{
+                await Profile.create({
+                    name, typeInvestor, UserId
+                })
+            }
 
             res.redirect("/profile?status=updated")
         } catch (error) {
-            res.send(error)
+            if(error.name=== "SequelizeValidationError" || error.name === "SequelizeUniqueConstraintError"){
+                const errors = error.errors.map(el=>el.message)
+                res.redirect("/profile?errors="+errors)
+            }else{
+                res.send(error)
+            }
         }
     }
 }

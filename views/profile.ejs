@@ -52,14 +52,25 @@
                         <strong>Profile</strong> has been updated
                     </div>
                 <% } %>
+                <% if (errors) { %>
+                    <div class="col-lg-6 offset-lg-3 alert alert-danger alert-dismissible fade show" role="alert">
+                        <strong class="text-center">Error !</strong>
+                        <ul style="padding-left: 20px;">
+                            <% errors.split(",").forEach(el => { %>
+                                <li style="list-style: disc !important;"><%= el %></li>
+                            <% }) %>
+                        </ul>
+                        <a href="javascript:;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+                    </div>
+                <% } %>
                 <div class="col-lg-6 offset-lg-3">
-                    <form id="contact" action="profile/edit/<%= data.UserId %>" method="post">
+                    <form id="contact" action="profile/edit/<%= data.id %>" method="post">
                         <div class="row">
                             <div class="col-lg-4">
                                 <h4 for="name" class="m-2">Full Name</h4>
                             </div>
                             <div class="col-lg-8">
-                                <input type="text" name="name" id="name" value="<%= data.name %>">
+                                <input type="text" name="name" id="name" value="<%= data.Profile ? data.Profile.name :"" %>">
                             </div>
 
                             <div class="col-lg-4">
@@ -68,24 +79,25 @@
                             <div class="col-lg-8">
                                 <% const investors = ["Investor Konservatif","Investor Moderat","Investor Agresif"] %>
                                 <select name="typeInvestor" id="typeInvestor" class="form-control mb-3" style="border-radius: 23px;background-color:#282b2f;color:#afafaf;border:1px solid #404245;border-color:#404245 !important">
+                                    <option value="">--Select--</option>
                                     <% investors.forEach(el => { %>
-                                        <option value="<%= el %>" <%= data.typeInvestor === el ? "selected" : "" %> ><%= el %></option>
+                                        <option value="<%= el %>" <%= (data.Profile && data.Profile.typeInvestor) === el ? "selected" : "" %> ><%= el %></option>
                                     <% }) %>
                                 </select>
                             </div>
 
                             <div class="col-lg-4">
-                                <h4 for="username" class="m-2">Username</h4>
+                                <h4 for="username" class="m-2">Username <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-lg-8">
-                                <input type="username" name="username" id="username" value="<%= data.User.username %>">
+                                <input type="username" name="username" id="username" value="<%= data.username %>">
                             </div>
 
                             <div class="col-lg-4">
-                                <h4 for="email" class="m-2">Email</h4>
+                                <h4 for="email" class="m-2">Email <span class="text-danger">*</span></h4>
                             </div>
                             <div class="col-lg-8">
-                                <input type="email" name="email" id="email" value="<%= data.User.email %>">
+                                <input type="email" name="email" id="email" value="<%= data.email %>">
                             </div>
 
                             <div class="col-lg-12">

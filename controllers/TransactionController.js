@@ -9,7 +9,8 @@ class TransactionController {
             const { username, balance, role} = req.session
             const stock = await Stock.findByPk(StockId)
             
-            res.render("transaction-buy", {username, balance, formatRupiah, stock, role})
+            const {errors} = req.query
+            res.render("transaction-buy", {username, balance, formatRupiah, stock, role, errors})
         } catch (error) {
             res.send(error)
         }
@@ -37,13 +38,16 @@ class TransactionController {
 
             res.redirect("/dashboard")
         } catch (error) {
-            res.send(error)
+            if(error.name=== "SequelizeValidationError"){
+                const errors = error.errors.map(el=>el.message)
+
+                const { StockId } = req.params
+                res.redirect(`/transaction/buy/${StockId}?errors=`+errors)
+            }else{
+                res.send(error)
+            }
         }
     }
-
-    
-
-    
 
     static async sell(req, res){
         try {
