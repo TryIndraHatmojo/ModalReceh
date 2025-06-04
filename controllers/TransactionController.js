@@ -1,5 +1,5 @@
 const { User, Stock, Transaction, Portfolio } = require("../models")
-const { formatRupiah } = require("../helpers/helper")
+const { formatRupiah, formatDateLocal } = require("../helpers/helper")
 
 class TransactionController {
 
@@ -47,7 +47,34 @@ class TransactionController {
 
     static async sell(req, res){
         try {
-            
+            const { StockId } = req.params
+            const { username, balance, UserId} = req.session
+
+            // const data = await Transaction.findAll({
+            //     include:{
+            //         model: Stock
+            //     },
+            //     where:{
+            //         StockId,
+            //         UserId
+            //     }
+            // })
+
+            const stock = await Stock.findOne({
+                include:{
+                    model: Transaction,
+                    where: {
+                        UserId
+                    }
+                },
+                where:{
+                    id: StockId
+                },
+                order: [[{ model: Transaction }, 'createdAt', 'ASC']]
+            })
+
+            res.render("transaction-sell" , {username, balance, formatRupiah, stock, formatDateLocal})
+
         } catch (error) {
             res.send(error)
         }

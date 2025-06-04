@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('partials/head.ejs') %>
-    <title>Modal Receh - Portfolio</title>
+    <title>Modal Receh - Sell Stock</title>
 </head>
 
 <body>
@@ -43,7 +43,7 @@
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <div class="line-dec"></div>
-                        <h2>Your <em>Portfolios</em> List</h2>
+                        <h2>Sell Stocks <em><%= stock.code %></em> <%= stock.name %></h2>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -51,10 +51,9 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center">#</th>
-                                <th scope="col" class="text-center">Code</th>
-                                <th scope="col" class="text-center">Name</th>
+                                <th scope="col" class="text-center">Date Buy</th>
                                 <th scope="col" class="text-center">Qty Lot</th>
-                                <th scope="col" class="text-center">Avg Price</th>
+                                <th scope="col" class="text-center">Buy Price</th>
                                 <th scope="col" class="text-center">Current Price</th>
                                 <th scope="col" class="text-center">Invested</th>
                                 <th scope="col" class="text-center">Profit/Loss</th>
@@ -63,31 +62,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <% portfolios[0].Stocks.forEach((el, i) => { %>
+                            <% stock.Transactions.forEach((el, i) => { %>
                                 <tr>
                                     <th scope="row" class="text-center"><%= i+1 %></th>
-                                    <td class="text-center"><%= el.code %></td>
-                                    <td class="text-center"><%= el.name %></td>
-                                    <td class="text-center"><%= el.Portfolio.qty %></td>
-                                    <td class="text-center"><%= formatRupiah(el.Portfolio.avgBuyPrice) %></td>
-                                    <td class="text-center"><%= formatRupiah(el.currentPrice) %></td>
-                                    <td class="text-center"><%= formatRupiah(el.Portfolio.invested) %></td>
+                                    <td class="text-center"><%= formatDateLocal(el.createdAt) %></td>
+                                    <td class="text-center"><%= el.qty %></td>
+                                    <td class="text-center"><%= formatRupiah(el.price) %></td>
+                                    <td class="text-center"><%= formatRupiah(stock.currentPrice) %></td>
+                                    <td class="text-center"><%= formatRupiah(el.totalPrice) %></td>
                                     <td class="text-center">
-                                        <% if (el.Portfolio.profitLoss(el.currentPrice) < 0) { %>
-                                            <b class="text-danger"><%= formatRupiah(el.Portfolio.profitLoss(el.currentPrice)) %></b>
+                                        <% if (el.profitLoss(stock.currentPrice) < 0) { %>
+                                            <b class="text-danger"><%= formatRupiah(el.profitLoss(stock.currentPrice)) %></b>
                                         <% } else { %>
-                                            <b class="text-success"><%= formatRupiah(el.Portfolio.profitLoss(el.currentPrice)) %></b>
+                                            <b class="text-success"><%= formatRupiah(el.profitLoss(stock.currentPrice)) %></b>
                                         <% } %>
                                     </td>
                                     <td class="text-center">
-                                        <% if (el.Portfolio.profitLossPercent(el.currentPrice) < 0) { %>
-                                            <b class="text-danger"><%= el.Portfolio.profitLossPercent(el.currentPrice).toFixed(2) %> %</b>
+                                        <% if (el.profitLossPercent(stock.currentPrice) < 0) { %>
+                                            <b class="text-danger"><%= el.profitLossPercent(stock.currentPrice).toFixed(2) %> %</b>
                                         <% } else { %>
-                                            <b class="text-success"><%= el.Portfolio.profitLossPercent(el.currentPrice).toFixed(2) %> %</b>
+                                            <b class="text-success"><%= el.profitLossPercent(stock.currentPrice).toFixed(2) %> %</b>
                                         <% } %>
                                     </td>
                                     <td class="text-center">
-                                        <a href="/transaction/sell/<%= el.id %>" class="btn btn-sm btn-danger">Sell</a>
+                                        <a href="" class="btn btn-sm btn-danger">Sell</a>
                                     </td>
                                 </tr>
                             <% }) %>

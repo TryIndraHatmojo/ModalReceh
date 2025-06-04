@@ -16,6 +16,18 @@ module.exports = (sequelize, DataTypes) => {
       Transaction.belongsTo(models.Stock)
     }
 
+    profitLoss(currentPrice){
+      let invested = this.totalPrice
+      let currentTotal = currentPrice * this.qty * 100
+      return invested - currentTotal
+    }
+
+    profitLossPercent(currentPrice){
+      let invested = this.totalPrice
+      let currentTotal = currentPrice * this.qty * 100
+      return (invested - currentTotal) / invested * 100
+    }
+
     static async userStockData(StockId, UserId){
       try {
         const transactions = await Transaction.findAll({
@@ -42,7 +54,11 @@ module.exports = (sequelize, DataTypes) => {
     totalPrice: DataTypes.BIGINT,
     UserId: DataTypes.INTEGER,
     StockId: DataTypes.INTEGER,
-    type: DataTypes.STRING
+    type: DataTypes.STRING,
+    sellPrice: DataTypes.INTEGER,
+    totalSellPrice: DataTypes.BIGINT,
+    profit: DataTypes.BIGINT,
+    profitPersen: DataTypes.FLOAT
   }, {
     sequelize,
     modelName: 'Transaction',
