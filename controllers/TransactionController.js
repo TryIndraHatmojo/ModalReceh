@@ -6,10 +6,10 @@ class TransactionController {
     static async buy(req, res){
         try {
             const { StockId } = req.params
-            const { username, balance } = req.session
+            const { username, balance, role} = req.session
             const stock = await Stock.findByPk(StockId)
             
-            res.render("transaction-buy", {username, balance, formatRupiah, stock})
+            res.render("transaction-buy", {username, balance, formatRupiah, stock, role})
         } catch (error) {
             res.send(error)
         }

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('partials/head.ejs') %>
+    <title>Modal Receh - Edit Stock</title>
+</head>
+
+<body>
+
+    <%- include('partials/loading.ejs') %>
+
+    <header class="header-area header-sticky">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="main-nav">
+                        <!-- ***** Logo Start ***** -->
+                        <a href="/" class="logo">
+                            <img src="/assets/images/modal-receh.png" alt="" style="width: 120px;height: 60px;">
+                        </a>
+                        <!-- ***** Logo End ***** -->
+                        <!-- ***** Menu Start ***** -->
+                        <ul class="nav">
+                            <li><a href="/dashboard">Dashboard</a></li>
+                            <li><a href="/portfolio">Portfolio</a></li>
+                            <li><a href="/stocks" class="active">Stocks</a></li>
+                            <li><a href="/logout">Logout</a></li>
+                            <li><a href="/profile" style="text-transform: none;"><%= username %>: <%= formatRupiah(balance) %></a></li>
+                        </ul>   
+                        <a class='menu-trigger'>
+                            <span>Menu</span>
+                        </a>
+                        <!-- ***** Menu End ***** -->
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+    <div class="item-details-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="section-heading">
+                        <div class="line-dec"></div>
+                        <h2>Edit <em>Stock</em></h2>
+                    </div>
+                </div>
+                <div class="col-lg-6 offset-lg-3">
+                    <form id="contact" action="/stocks/edit/<%= data.id %>" method="post">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Code</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" name="code" class="rounded-1 mb-3" value="<%= data.code %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Name</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" name="name" class="rounded-1 mb-3" value="<%= data.name %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Sector</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <% const sectors = ["Finance", "Telecommunication" ] %>
+                                <input type="text" name="sector" class="rounded-1 mb-3" value="<%= data.sector %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Current Price</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" name="currentPrice" class="rounded-1 mb-3" value="<%= data.currentPrice %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Previous Price</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" name="prevPrice" class="rounded-1 mb-3" value="<%= data.prevPrice %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Annual Return(%)</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="number" name="annualReturn" class="rounded-1 mb-3" value="<%= data.annualReturn %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Image Icon URL</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" name="img" class="rounded-1 mb-3" value="<%= data.img %>">
+                            </div>
+
+                            <div class="col-sm-4">
+                                <h4 class="m-2">Description</h4>
+                            </div>
+                            <div class="col-sm-8">
+                                <input type="text" name="description" class="rounded-1 mb-3" value="<%= data.description %>">
+                            </div>
+                            
+                            <div class="col-lg-4">
+                                <a href="/stocks">
+                                    <button type="button" class="icon-button">Back</button>
+                                </a>
+                            </div>
+                            <div class="col-lg-8">
+                                <button type="submit" class="icon-button">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer.ejs') %>
+</body>
+</html>
