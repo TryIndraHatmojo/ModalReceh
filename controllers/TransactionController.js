@@ -59,7 +59,8 @@ class TransactionController {
                 include:{
                     model: Transaction,
                     where: {
-                        UserId
+                        UserId,
+                        type: "Buy"
                     }
                 },
                 where:{
@@ -67,6 +68,9 @@ class TransactionController {
                 },
                 order: [[{ model: Transaction }, 'createdAt', 'DESC']]
             })
+            if(!stock){
+                res.redirect("/portfolio")
+            }
 
             res.render("transaction-sell" , {username, balance, formatRupiah, stock, formatDateLocal})
 
@@ -75,9 +79,66 @@ class TransactionController {
         }
     }
 
-    static async sellPost(req, res){
+    static async sellStock(req, res){
         try {
+            const { TransactionId } = req.params
+            const { username, balance, UserId} = req.session
             
+            const transaction = await Transaction.findByPk(TransactionId,{
+                include: {
+                    model: Stock
+                }
+            })
+
+            let sellPrice = transaction.Stock.currentPrice
+            let totalSellPrice = sellPrice * transaction.qty * 100
+            const profit = totalSellPrice - transaction.totalPrice
+            let profitPersen = ( totalSellPrice - transaction.totalPrice) / totalSellPrice * 100
+            profitPersen = profitPersen.toFixed(2)
+
+            // res.send(totalSellPrice)
+            await transaction.update({
+                sellPrice,
+                profit,
+                profitPersen,
+                type: "Sell",
+                totalSellPrice
+            })
+
+            await Portfolio.createOrUpdatePortfolio(transaction.Stock.id, UserId)
+
+            const user = await User.addBalanceUser(UserId, Number(totalSellPrice))
+            req.session.UserId = user.id
+            req.session.role = user.role
+            req.session.username = user.username
+            req.session.balance = user.balance
+
+            res.redirect(`/transaction/sell/history/${transaction.Stock.id}`)
+        } catch (error) {
+            res.send(error)
+        }
+    }
+
+    static async sellHistory (req, res){
+        try {
+            const { StockId } = req.params
+            const { username, balance, UserId} = req.session
+
+            const stock = await Stock.findOne({
+                include:{
+                    model: Transaction,
+                    where: {
+                        UserId,
+                        type: "Sell"
+                    }
+                },
+                where:{
+                    id: StockId
+                },
+                order: [[{ model: Transaction }, 'createdAt', 'DESC']]
+            })
+            res.render("transaction-history-sell" , {username, balance, formatRupiah, stock, formatDateLocal})
+
         } catch (error) {
             res.send(error)
         }
@@ -85,7 +146,7 @@ class TransactionController {
 
     static async invoice(req, res){
         try {
-            const { id } = req.params
+            const { TransactionId } = req.params
             const { username, balance, UserId} = req.session
 
             const user = await User.findByPk(UserId,{
@@ -94,7 +155,7 @@ class TransactionController {
                 }
             })
             
-            const transaction = await Transaction.findByPk(id,{
+            const transaction = await Transaction.findByPk(TransactionId,{
                 include: {
                     model: Stock
                 }

@@ -73,21 +73,24 @@
                                     <td class="text-center"><%= formatRupiah(el.currentPrice) %></td>
                                     <td class="text-center"><%= formatRupiah(el.Portfolio.invested) %></td>
                                     <td class="text-center">
-                                        <% if (el.Portfolio.profitLoss(el.currentPrice) < 0) { %>
-                                            <b class="text-danger"><%= formatRupiah(el.Portfolio.profitLoss(el.currentPrice)) %></b>
+                                        <% let profitLoss = el.Portfolio.profitLoss(el.currentPrice) %>
+                                        <% if (profitLoss < 0) { %>
+                                            <b class="text-danger"><%= formatRupiah(profitLoss) %></b>
                                         <% } else { %>
-                                            <b class="text-success"><%= formatRupiah(el.Portfolio.profitLoss(el.currentPrice)) %></b>
+                                            <b class="text-success"><%= formatRupiah(profitLoss) %></b>
                                         <% } %>
                                     </td>
                                     <td class="text-center">
-                                        <% if (el.Portfolio.profitLossPercent(el.currentPrice) < 0) { %>
-                                            <b class="text-danger"><%= el.Portfolio.profitLossPercent(el.currentPrice).toFixed(2) %> %</b>
+                                        <% let profitLossPercent = el.Portfolio.profitLossPercent(el.currentPrice) %>
+                                        <% if (profitLossPercent < 0) { %>
+                                            <b class="text-danger"><%= profitLossPercent.toFixed(2) %> %</b>
                                         <% } else { %>
-                                            <b class="text-success"><%= el.Portfolio.profitLossPercent(el.currentPrice).toFixed(2) %> %</b>
+                                            <b class="text-success"><%= profitLossPercent.toFixed(2) %> %</b>
                                         <% } %>
                                     </td>
                                     <td class="text-center">
-                                        <a href="/transaction/sell/<%= el.id %>" class="btn btn-sm btn-primary">Detail</a>
+                                        <a href="/transaction/sell/<%= el.id %>" class="btn btn-sm btn-warning">Sell Stocks</a>
+                                        <a href="/transaction/sell/history/<%= el.id %>" class="btn btn-sm btn-primary">History Sold Stocks</a>
                                     </td>
                                 </tr>
                             <% }) %>

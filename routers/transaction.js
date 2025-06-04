@@ -7,8 +7,9 @@ router.get("/buy/:StockId", TransactionController.buy)
 router.post("/buy/:StockId", TransactionController.buyPost)
 
 router.get("/sell/:StockId", TransactionController.sell)
-router.post("/sell/:id", TransactionController.sellPost)
+router.get("/sell/stock/:TransactionId", TransactionController.sellStock)
+router.get("/sell/history/:StockId", TransactionController.sellHistory)
 
-router.get("/invoice/:id", TransactionController.invoice)
+router.get("/invoice/:TransactionId", TransactionController.invoice)
 
 module.exports = router

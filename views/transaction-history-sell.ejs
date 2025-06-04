@@ -43,7 +43,7 @@
                 <div class="col-lg-12">
                     <div class="section-heading">
                         <div class="line-dec"></div>
-                        <h2>Sell Stocks <em><%= stock.code %></em> <%= stock.name %></h2>
+                        <h2>History Sold <em><%= stock.code %></em> <%= stock.name %> Stocks</h2>
                     </div>
                 </div>
                 <div class="col-lg-12">
@@ -53,10 +53,12 @@
                             <tr>
                                 <th scope="col" class="text-center">#</th>
                                 <th scope="col" class="text-center">Date Buy</th>
+                                <th scope="col" class="text-center">Date Sell</th>
                                 <th scope="col" class="text-center">Qty Lot</th>
                                 <th scope="col" class="text-center">Buy Price</th>
-                                <th scope="col" class="text-center">Current Price</th>
+                                <th scope="col" class="text-center">Sell Price</th>
                                 <th scope="col" class="text-center">Invested</th>
+                                <th scope="col" class="text-center">Total Sell</th>
                                 <th scope="col" class="text-center">Profit/Loss</th>
                                 <th scope="col" class="text-center">Profit/Loss (%)</th>
                                 <th scope="col" class="text-center">Action</th>
@@ -67,26 +69,27 @@
                                 <tr>
                                     <th scope="row" class="text-center"><%= i+1 %></th>
                                     <td class="text-center"><%= formatDateLocal(el.createdAt) %></td>
+                                    <td class="text-center"><%= formatDateLocal(el.updatedAt) %></td>
                                     <td class="text-center"><%= el.qty %></td>
                                     <td class="text-center"><%= formatRupiah(el.price) %></td>
-                                    <td class="text-center"><%= formatRupiah(stock.currentPrice) %></td>
+                                    <td class="text-center"><%= formatRupiah(el.sellPrice) %></td>
                                     <td class="text-center"><%= formatRupiah(el.totalPrice) %></td>
+                                    <td class="text-center"><%= formatRupiah(el.totalSellPrice) %></td>
                                     <td class="text-center">
-                                        <% if (el.profitLoss(stock.currentPrice) < 0) { %>
-                                            <b class="text-danger"><%= formatRupiah(el.profitLoss(stock.currentPrice)) %></b>
+                                        <% if (el.profit < 0) { %>
+                                            <b class="text-danger"><%= formatRupiah(el.profit) %></b>
                                         <% } else { %>
-                                            <b class="text-success"><%= formatRupiah(el.profitLoss(stock.currentPrice)) %></b>
+                                            <b class="text-success"><%= formatRupiah(el.profit) %></b>
                                         <% } %>
                                     </td>
                                     <td class="text-center">
-                                        <% if (el.profitLossPercent(stock.currentPrice) < 0) { %>
-                                            <b class="text-danger"><%= el.profitLossPercent(stock.currentPrice).toFixed(2) %> %</b>
+                                        <% if (el.profitPersen < 0) { %>
+                                            <b class="text-danger"><%= el.profitPersen %> %</b>
                                         <% } else { %>
-                                            <b class="text-success"><%= el.profitLossPercent(stock.currentPrice).toFixed(2) %> %</b>
+                                            <b class="text-success"><%= el.profitPersen %> %</b>
                                         <% } %>
                                     </td>
                                     <td class="text-center">
-                                        <a href="/transaction/sell/stock/<%= el.id %>" class="btn btn-sm btn-danger">Sell Stocks</a>
                                         <a href="/transaction/invoice/<%= el.id %>" class="btn btn-sm btn-primary">Print Purchased Invoice</a>
                                     </td>
                                 </tr>
