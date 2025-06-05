@@ -35,14 +35,14 @@ module.exports = (sequelize, DataTypes) => {
           }else{
             throw {
               name: "ErrorLogin",
-              error: "Password salah.",
+              error: "Password is incorrect",
               path: "password"
             }
           }
         }else{
           throw {
             name: "ErrorLogin",
-            error: "Email belum terdaftar.",
+            error: "Email is not registered",
             path: "email"
           }
         }

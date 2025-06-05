@@ -43,6 +43,15 @@
                         <h2><em>Login</em></h2>
                     </div>
                 </div>
+                <% if (errors) { %>
+                <div class="col-lg-4 offset-lg-4 alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong class="text-center">Error !</strong>
+                    <ul style="padding-left: 20px;">
+                        <li style="list-style: disc !important;"><%= errors %></li>
+                    </ul>
+                    <a href="javascript:;" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></a>
+                </div>
+                <% } %>
                 <div class="col-lg-4 offset-lg-4">
                     <form id="contact" action="/login" method="post">
                         <div class="row">
