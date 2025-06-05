@@ -4,7 +4,8 @@ class AuthController {
 
     static login(req, res){
         try {
-            res.render("home-login")
+            const {errors} = req.query
+            res.render("home-login", {errors})
         } catch (error) {
             res.send(error)
         }
@@ -22,7 +23,11 @@ class AuthController {
             
             res.redirect("/dashboard")
         } catch (error) {
-            res.send(error)
+            if(error.name=== "ErrorLogin"){
+                res.redirect("/login?errors="+error.error)
+            }else{
+                res.send(error)
+            }
         }
     }
 
